@@ -30,10 +30,9 @@ public class TransactionalServiceRouteWrapper extends SpringRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        onException(Exception.class).markRollbackOnlyLast();
-
         from(TRANSACTIONAL_SERVICE_ROUTE_WRAPPER)
                 .errorHandler(transactionErrorHandler(requiresNew))
+                .onException(Exception.class).markRollbackOnlyLast().end()
                 .policy(requiresNew)
                 .log("START OF SERVICE WRAPPER")
                 .to(INNER_SERVICE_ROUTE)

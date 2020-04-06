@@ -1,5 +1,6 @@
 package com.example.camel.camel.transacted.route;
 
+import com.example.camel.camel.transacted.processor.ExceptionElevationAndRemovalProcessor;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
@@ -26,9 +27,17 @@ public class TransactionalServiceRouteWrapper extends SpringRouteBuilder {
     SpringTransactionPolicy requiresNew;
 
     public static final String TRANSACTIONAL_SERVICE_ROUTE_WRAPPER = "direct:TRANSACTIONAL-SERVICE-ROUTE-WRAPPER";
+    public static final String SERVICE_ROUTE_OUTER = "direct:SERVICE-ROUTE-OUTER";
 
     @Override
     public void configure() throws Exception {
+
+        from(SERVICE_ROUTE_OUTER)
+                .errorHandler(noErrorHandler())
+                .log("START OF OUTER SERVICE")
+                .to(TRANSACTIONAL_SERVICE_ROUTE_WRAPPER)
+                .bean(ExceptionElevationAndRemovalProcessor.class)
+                .log("END OF OUTER SERVICE");
 
         from(TRANSACTIONAL_SERVICE_ROUTE_WRAPPER)
                 .errorHandler(transactionErrorHandler(requiresNew))

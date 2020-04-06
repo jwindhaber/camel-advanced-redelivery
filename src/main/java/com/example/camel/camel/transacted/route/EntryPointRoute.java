@@ -4,12 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.stereotype.Service;
 
-import static com.example.camel.camel.transacted.route.ServiceRouteOuter.SERVICE_ROUTE_OUTER;
 
-/**
- * @author juergen.windhaber
- * @since 17.4.0
- */
 @Service
 public class EntryPointRoute  extends RouteBuilder {
 
@@ -24,7 +19,7 @@ public class EntryPointRoute  extends RouteBuilder {
         from(ENTRY_POINT_ROUTE)
                 .errorHandler(defaultErrorHandler())
                 .log("START OF ENTRYPOINT")
-                .to(SERVICE_ROUTE_OUTER)
+                .to(TransactionalServiceRouteWrapper.SERVICE_ROUTE_OUTER)
                 .log("END OF ENTRYPOINT");
     }
 }

@@ -1,4 +1,4 @@
-package com.example.camel.camel.transacted.service;
+package com.example.camel.camel.transacted.processor;
 
 import com.example.camel.camel.transacted.exception.RetriableException;
 import org.apache.camel.Exchange;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @since 17.4.0
  */
 @Service
-public class ExchangeObserverAfter {
+public class ExceptionElevationAndRemovalProcessor {
 
     public String observe(Exchange exchange) throws Exception {
 

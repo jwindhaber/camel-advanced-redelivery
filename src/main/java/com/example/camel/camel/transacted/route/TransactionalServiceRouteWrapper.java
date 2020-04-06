@@ -25,7 +25,7 @@ public class TransactionalServiceRouteWrapper extends SpringRouteBuilder {
     @Qualifier(REQUIRES_NEW)
     SpringTransactionPolicy requiresNew;
 
-    public static final String TRANSACTIONAL_SERVICE_ROUTE_WRAPPER = "direct:TRANSACTIONAL_SERVICE_ROUTE_WRAPPER";
+    public static final String TRANSACTIONAL_SERVICE_ROUTE_WRAPPER = "direct:TRANSACTIONAL-SERVICE-ROUTE-WRAPPER";
 
     @Override
     public void configure() throws Exception {

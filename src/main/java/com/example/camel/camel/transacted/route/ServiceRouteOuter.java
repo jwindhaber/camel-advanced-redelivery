@@ -1,7 +1,6 @@
 package com.example.camel.camel.transacted.route;
 
-import com.example.camel.camel.transacted.service.ExchangeObserverAfter;
-import com.example.camel.camel.transacted.service.ExchangeObserverBefore;
+import com.example.camel.camel.transacted.processor.ExceptionElevationAndRemovalProcessor;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import static com.example.camel.camel.transacted.definition.TransactionSpecifica
 public class ServiceRouteOuter extends SpringRouteBuilder {
 
 
-    public static final String SERVICE_ROUTE_OUTER = "direct:Service-Route-Outer";
+    public static final String SERVICE_ROUTE_OUTER = "direct:SERVICE-ROUTE-OUTER";
 
     @Autowired
     @Qualifier(REQUIRES_NEW)
@@ -30,9 +29,8 @@ public class ServiceRouteOuter extends SpringRouteBuilder {
         from(SERVICE_ROUTE_OUTER)
                 .errorHandler(noErrorHandler())
                 .log("START OF OUTER SERVICE")
-                .bean(ExchangeObserverBefore.class)
                 .to(TransactionalServiceRouteWrapper.TRANSACTIONAL_SERVICE_ROUTE_WRAPPER)
-                .bean(ExchangeObserverAfter.class)
+                .bean(ExceptionElevationAndRemovalProcessor.class)
                 .log("END OF OUTER SERVICE");
 
     }

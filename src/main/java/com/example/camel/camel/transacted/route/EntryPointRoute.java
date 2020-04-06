@@ -1,8 +1,5 @@
 package com.example.camel.camel.transacted.route;
 
-import com.example.camel.camel.transacted.service.ExchangeObserverAfter;
-import com.example.camel.camel.transacted.service.ExchangeObserverBefore;
-import com.example.camel.camel.transacted.service.ExchangeObserverEntryPointReturn;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +12,7 @@ import static com.example.camel.camel.transacted.route.ServiceRouteOuter.SERVICE
 @Service
 public class EntryPointRoute  extends SpringRouteBuilder {
 
-    public static final String ENTRY_POINT_ROUTE = "seda:Entry-Point-Outer";
+    public static final String ENTRY_POINT_ROUTE = "seda:ENTRY-POINT-OUTER";
 
     @Override
     public void configure() throws Exception {
@@ -27,7 +24,6 @@ public class EntryPointRoute  extends SpringRouteBuilder {
                 .errorHandler(defaultErrorHandler())
                 .log("START OF ENTRYPOINT")
                 .to(SERVICE_ROUTE_OUTER)
-                .bean(ExchangeObserverEntryPointReturn.class)
                 .log("END OF ENTRYPOINT");
     }
 }

@@ -1,5 +1,6 @@
 package com.example.camel.camel.transacted.route;
 
+import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,12 @@ import static com.example.camel.camel.transacted.route.ServiceRouteOuter.SERVICE
  * @since 17.4.0
  */
 @Service
-public class EntryPointRoute  extends SpringRouteBuilder {
+public class EntryPointRoute  extends RouteBuilder {
 
     public static final String ENTRY_POINT_ROUTE = "seda:ENTRY-POINT-OUTER";
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
         onException(Exception.class).maximumRedeliveries(3);
         onException(RuntimeException.class).maximumRedeliveries(3);

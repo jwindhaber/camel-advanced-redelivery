@@ -1,6 +1,7 @@
 package com.example.camel.camel.transacted.route;
 
 import com.example.camel.camel.transacted.processor.ExceptionElevationAndRemovalProcessor;
+import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import static com.example.camel.camel.transacted.definition.TransactionSpecifica
  * @since 17.4.0
  */
 @Service
-public class ServiceRouteOuter extends SpringRouteBuilder {
+public class ServiceRouteOuter extends RouteBuilder {
 
 
     public static final String SERVICE_ROUTE_OUTER = "direct:SERVICE-ROUTE-OUTER";
@@ -24,7 +25,7 @@ public class ServiceRouteOuter extends SpringRouteBuilder {
     SpringTransactionPolicy requiresNew;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
         from(SERVICE_ROUTE_OUTER)
                 .errorHandler(noErrorHandler())

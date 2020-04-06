@@ -17,17 +17,16 @@ import static com.example.camel.camel.transacted.definition.TransactionSpecifica
  * @since 17.4.0
  */
 @Service
-public class InnerServiceRoute extends SpringRouteBuilder {
+public class InnerServiceRoute extends RouteBuilder {
 
     public static final String INNER_SERVICE_ROUTE = "direct:INNER-SERVICE-ROUTE";
 
     @Autowired
     @Qualifier(REQUIRES_NEW)
-    SpringTransactionPolicy requiresNew;
-
+    SpringTransactionPolicy requiresNewPolicy;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
         from(INNER_SERVICE_ROUTE)
                 .errorHandler(noErrorHandler())

@@ -26,7 +26,8 @@ public class StrawberryProducer {
 
         if(counter < 3){
             counter++;
-            throw new RetriableException("SOME RETRY EXCEPTION");
+//            throw new RetriableException("SOME RETRY EXCEPTION");
+//            throw new RuntimeException("SOME RETRY EXCEPTION");
         }
         return someBody;
     }

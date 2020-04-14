@@ -25,9 +25,13 @@ class ApplicationTests {
 		Assertions.assertEquals(0, numberOfApplesBefore);
 
 		System.out.println(numberOfApplesBefore);
-		String some_response = (String)producerTemplate.sendBody(ENTRY_POINT_ROUTE, InOut, "SOME_BODY");
+		try {
+			String some_response = (String)producerTemplate.sendBody(ENTRY_POINT_ROUTE, InOut, "SOME_BODY");
+			System.out.println(some_response);
 
-		System.out.println(some_response);
+		} catch (Exception exception){
+			// noop
+		}
 
 		Integer numberOfApples = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM APPLE", Integer.class);
 		System.out.println(numberOfApples);

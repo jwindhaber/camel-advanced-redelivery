@@ -22,8 +22,12 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.1.0'
-	implementation 'org.apache.camel:camel-core:3.1.0'
+	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.2.0'
+	compile("org.apache.camel.springboot:camel-jmx-starter:3.2.0")
+	compile("org.apache.camel:camel-management:3.2.0")
+	implementation 'org.apache.camel:camel-core:3.2.0'
+	testImplementation group: 'org.apache.camel', name: 'camel-test-spring-junit5', version: '3.2.0'
+
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
